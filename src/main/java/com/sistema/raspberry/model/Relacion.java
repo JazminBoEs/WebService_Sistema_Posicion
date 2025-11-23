@@ -1,48 +1,75 @@
 package com.sistema.raspberry.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Relacion")
+@Table(name = "relacion")
 public class Relacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Relacion")
-    private Long idRelacion;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_Posicion", nullable = false)
-    private Posicion posicion;
+    private Long id_tag;
 
-    @ManyToOne
-    @JoinColumn(name = "id_AprilTag", nullable = false)
-    private AprilTag aprilTag;
+    private Double pos_x_robot;
+    private Double pos_y_robot;
+    private Double orientacion;
 
-    @Column(name = "id_tag")
-    private int idTagDetectado;  // El id_tag que detecta la cámara (desde PhotonVision)
+    private LocalDateTime fecha_hora;
 
-    // GETTERS Y SETTERS
+    public Relacion() {}
 
-    public Long getIdRelacion() {
-        return idRelacion;
+    public Relacion(Long id_tag, Double pos_x_robot, Double pos_y_robot, Double orientacion, LocalDateTime fecha_hora) {
+        this.id_tag = id_tag;
+        this.pos_x_robot = pos_x_robot;
+        this.pos_y_robot = pos_y_robot;
+        this.orientacion = orientacion;
+        this.fecha_hora = fecha_hora;
     }
 
-    public Posicion getPosicion() {
-        return posicion;
+    public Long getId() {
+        return id;
     }
 
-    public void setPosicion(Posicion posicion) {
-        this.posicion = posicion;
+    public Long getId_tag() {
+        return id_tag;
     }
 
-    public AprilTag getAprilTag() {
-        return aprilTag;
+    public void setId_tag(Long id_tag) {
+        this.id_tag = id_tag;
     }
 
-    public void setAprilTag(AprilTag aprilTag) {
-        this.aprilTag = aprilTag;
+    public Double getPos_x_robot() {
+        return pos_x_robot;
     }
 
-    public int getIdTagDetectado() {
-        retur
+    public void setPos_x_robot(Double pos_x_robot) {
+        this.pos_x_robot = pos_x_robot;
+    }
+
+    public Double getPos_y_robot() {
+        return pos_y_robot;
+    }
+
+    public void setPos_y_robot(Double pos_y_robot) {
+        this.pos_y_robot = pos_y_robot;
+    }
+
+    public Double getOrientacion() {
+        return orientacion;
+    }
+
+    public void setOrientacion(Double orientacion) {
+        this.orientacion = orientacion;
+    }
+
+    public LocalDateTime getFecha_hora() {
+        return fecha_hora;
+    }
+
+    public void setFecha_hora(LocalDateTime fecha_hora) {
+        this.fecha_hora = fecha_hora;
+    }
+}
