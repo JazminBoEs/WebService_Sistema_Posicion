@@ -1,75 +1,55 @@
 package com.sistema.raspberry.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "relacion")
 public class Relacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long id_tag;
+    private String tipo; // ejemplo: "cerca", "lejos", etc.
+    private double distancia;
 
-    private Double pos_x_robot;
-    private Double pos_y_robot;
-    private Double orientacion;
-
-    private LocalDateTime fecha_hora;
+    // Muchas relaciones pertenecen a una Posicion
+    @ManyToOne
+    @JoinColumn(name = "posicion_id")
+    private Posicion posicion;
 
     public Relacion() {}
 
-    public Relacion(Long id_tag, Double pos_x_robot, Double pos_y_robot, Double orientacion, LocalDateTime fecha_hora) {
-        this.id_tag = id_tag;
-        this.pos_x_robot = pos_x_robot;
-        this.pos_y_robot = pos_y_robot;
-        this.orientacion = orientacion;
-        this.fecha_hora = fecha_hora;
+    public Relacion(String tipo, double distancia, Posicion posicion) {
+        this.tipo = tipo;
+        this.distancia = distancia;
+        this.posicion = posicion;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Long getId_tag() {
-        return id_tag;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setId_tag(Long id_tag) {
-        this.id_tag = id_tag;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Double getPos_x_robot() {
-        return pos_x_robot;
+    public double getDistancia() {
+        return distancia;
     }
 
-    public void setPos_x_robot(Double pos_x_robot) {
-        this.pos_x_robot = pos_x_robot;
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
 
-    public Double getPos_y_robot() {
-        return pos_y_robot;
+    public Posicion getPosicion() {
+        return posicion;
     }
 
-    public void setPos_y_robot(Double pos_y_robot) {
-        this.pos_y_robot = pos_y_robot;
-    }
-
-    public Double getOrientacion() {
-        return orientacion;
-    }
-
-    public void setOrientacion(Double orientacion) {
-        this.orientacion = orientacion;
-    }
-
-    public LocalDateTime getFecha_hora() {
-        return fecha_hora;
-    }
-
-    public void setFecha_hora(LocalDateTime fecha_hora) {
-        this.fecha_hora = fecha_hora;
+    public void setPosicion(Posicion posicion) {
+        this.posicion = posicion;
     }
 }

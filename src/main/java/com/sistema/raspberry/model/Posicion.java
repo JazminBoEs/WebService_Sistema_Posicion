@@ -1,71 +1,64 @@
 package com.sistema.raspberry.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Posicion")
 public class Posicion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Posicion")
-    private Long idPosicion;
+    private Long id;
 
-    private double x;
-    private double y;
-    private double orientacion;
+    private double latitud;
+    private double longitud;
+    private String descripcion;
 
-    private LocalDateTime fecha;
+    // Relación bidireccional (una posicion - muchas relaciones)
+    @OneToMany(mappedBy = "posicion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Relacion> relaciones;
 
-    @OneToMany(mappedBy = "posicion", cascade = CascadeType.ALL)
-    private List<Relacion> relaciones = new ArrayList<>();
+    public Posicion() {}
 
-    // GETTERS Y SETTERS
-
-    public Long getIdPosicion() {
-        return idPosicion;
+    public Posicion(double latitud, double longitud, String descripcion) {
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.descripcion = descripcion;
     }
 
-    public double getX() {
-        return x;
+    public Long getId() {
+        return id;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public double getLatitud() {
+        return latitud;
     }
 
-    public double getY() {
-        return y;
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public double getLongitud() {
+        return longitud;
     }
 
-    public double getOrientacion() {
-        return orientacion;
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
-    public void setOrientacion(double orientacion) {
-        this.orientacion = orientacion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public List<Relacion> getRelaciones() {
         return relaciones;
     }
 
-    public void addRelacion(Relacion relacion) {
-        relaciones.add(relacion);
+    public void setRelaciones(List<Relacion> relaciones) {
+        this.relaciones = relaciones;
     }
 }
