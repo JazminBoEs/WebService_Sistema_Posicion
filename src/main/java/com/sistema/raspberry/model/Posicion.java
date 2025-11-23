@@ -67,6 +67,5 @@ public class Posicion {
 
     public void addRelacion(Relacion relacion) {
         relaciones.add(relacion);
-        relacion.setPosicion(this);
     }
 }

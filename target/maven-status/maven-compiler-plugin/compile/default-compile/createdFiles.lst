@@ -1,0 +1,5 @@
+com/sistema/raspberry/model/AprilTag.class
+com/sistema/raspberry/repository/RelacionRepository.class
+com/sistema/raspberry/repository/AprilTagRepository.class
+com/sistema/raspberry/Application.class
+com/sistema/raspberry/model/Relacion.class
