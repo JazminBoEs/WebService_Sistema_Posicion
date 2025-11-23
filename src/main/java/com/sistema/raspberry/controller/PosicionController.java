@@ -6,12 +6,14 @@ import com.sistema.raspberry.model.Relacion;
 import com.sistema.raspberry.repository.AprilTagRepository;
 import com.sistema.raspberry.repository.PosicionRepository;
 import com.sistema.raspberry.repository.RelacionRepository;
+import com.sistema.raspberry.dto.PosicionDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/posiciones")
@@ -33,20 +35,22 @@ public class PosicionController {
 
     // GET: obtener todas las posiciones
     @GetMapping
-    public List<Posicion> getAllPositions() {
-        return posicionRepository.findAll();
+    public List<PosicionDTO> getAllPositions() {
+        return posicionRepository.findAll().stream()
+                .map(PosicionDTO::new)
+                .collect(Collectors.toList());
     }
 
     // GET: obtener la última posición registrada
     @GetMapping("/ultima")
-    public ResponseEntity<Posicion> getLastPosition() {
+    public ResponseEntity<PosicionDTO> getLastPosition() {
         List<Posicion> posiciones = posicionRepository.findAll();
         if (posiciones.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         // Obtener la última posición (la más reciente por ID)
         Posicion ultima = posiciones.get(posiciones.size() - 1);
-        return ResponseEntity.ok(ultima);
+        return ResponseEntity.ok(new PosicionDTO(ultima));
     }
 
     // POST: crear nueva posición con relaciones a AprilTags
