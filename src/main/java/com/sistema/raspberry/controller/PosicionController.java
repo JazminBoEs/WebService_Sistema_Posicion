@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/posiciones")
+@RequestMapping("/posiciones")
 @CrossOrigin(origins = "*")
 public class PosicionController {
 
