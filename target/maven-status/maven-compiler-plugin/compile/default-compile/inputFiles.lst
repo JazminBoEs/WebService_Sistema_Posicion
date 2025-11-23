@@ -3,6 +3,7 @@
 /workspaces/WebService_Sistema_Posicion/src/main/java/com/sistema/raspberry/repository/RelacionRepository.java
 /workspaces/WebService_Sistema_Posicion/src/main/java/com/sistema/raspberry/controller/AprilTagController.java
 /workspaces/WebService_Sistema_Posicion/src/main/java/com/sistema/raspberry/controller/RelacionController.java
+/workspaces/WebService_Sistema_Posicion/src/main/java/com/sistema/raspberry/dto/PosicionDTO.java
 /workspaces/WebService_Sistema_Posicion/src/main/java/com/sistema/raspberry/model/Posicion.java
 /workspaces/WebService_Sistema_Posicion/src/main/java/com/sistema/raspberry/model/AprilTag.java
 /workspaces/WebService_Sistema_Posicion/src/main/java/com/sistema/raspberry/controller/PosicionController.java
