@@ -89,4 +89,3 @@ Si la fecha no se puede interpretar, el servicio guarda la fecha actual automát
 
 Puedes editar los AprilTags directamente en la tabla April_Tag.
 
-Proyecto listo para conectar tu algoritmo de localización y la interfaz web.

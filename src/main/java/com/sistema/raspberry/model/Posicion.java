@@ -1,57 +1,78 @@
 package com.sistema.raspberry.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "Posicion")
 public class Posicion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @JsonProperty("id_Posicion")
+    @Column(name = "id_Posicion")
+    private Long idPosicion;
 
-    private double latitud;
-    private double longitud;
-    private String descripcion;
+    private Double x;
+    private Double y;
+    private Double orientacion;
+    private LocalDateTime fecha;
 
-    // Relación bidireccional (una posicion - muchas relaciones)
+    // Relación bidireccional con Relacion
     @OneToMany(mappedBy = "posicion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Relacion> relaciones;
 
+    // Constructores
     public Posicion() {}
 
-    public Posicion(double latitud, double longitud, String descripcion) {
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.descripcion = descripcion;
+    public Posicion(Double x, Double y, Double orientacion, LocalDateTime fecha) {
+        this.x = x;
+        this.y = y;
+        this.orientacion = orientacion;
+        this.fecha = fecha;
     }
 
-    public Long getId() {
-        return id;
+    // Getters y Setters
+    public Long getIdPosicion() {
+        return idPosicion;
     }
 
-    public double getLatitud() {
-        return latitud;
+    public void setIdPosicion(Long idPosicion) {
+        this.idPosicion = idPosicion;
     }
 
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
+    public Double getX() {
+        return x;
     }
 
-    public double getLongitud() {
-        return longitud;
+    public void setX(Double x) {
+        this.x = x;
     }
 
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
+    public Double getY() {
+        return y;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setY(Double y) {
+        this.y = y;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public Double getOrientacion() {
+        return orientacion;
+    }
+
+    public void setOrientacion(Double orientacion) {
+        this.orientacion = orientacion;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
 
     public List<Relacion> getRelaciones() {
