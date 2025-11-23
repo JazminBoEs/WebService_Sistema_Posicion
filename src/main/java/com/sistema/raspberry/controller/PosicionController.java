@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/posiciones")
+@RequestMapping("/api/posiciones")
 @CrossOrigin(origins = "*")
 public class PosicionController {
 
@@ -57,6 +57,16 @@ public class PosicionController {
     @PostMapping
     public ResponseEntity<?> createPosition(@RequestBody Map<String, Object> payload) {
         try {
+            // Extraer IDs de AprilTags primero para validar
+            @SuppressWarnings("unchecked")
+            List<Integer> aprilTagIds = (List<Integer>) payload.get("idAprilTag");
+            
+            // Validar que haya al menos un AprilTag
+            if (aprilTagIds == null || aprilTagIds.isEmpty()) {
+                return ResponseEntity.badRequest()
+                        .body("Error: Debe proporcionar al menos un AprilTag");
+            }
+            
             // Extraer datos de la posición
             Double x = ((Number) payload.get("x")).doubleValue();
             Double y = ((Number) payload.get("y")).doubleValue();
@@ -69,10 +79,6 @@ public class PosicionController {
             // Crear y guardar la posición
             Posicion posicion = new Posicion(x, y, orientacion, fecha);
             Posicion savedPosicion = posicionRepository.save(posicion);
-            
-            // Extraer IDs de AprilTags
-            @SuppressWarnings("unchecked")
-            List<Integer> aprilTagIds = (List<Integer>) payload.get("idAprilTag");
             
             // Crear relaciones
             if (aprilTagIds != null && !aprilTagIds.isEmpty()) {

@@ -54,34 +54,40 @@ Guarda una posición junto con los AprilTags detectados.
 
 Ejemplo de JSON:
 ```json
-{
-  "x": 1.35,
-  "y": 2.10,
-  "orientacion": 45,
-  "fecha": "2025-11-23T14:22:00",
-  "idAprilTags": [1, 4, 7]
+{   
+  "x": 1.5, 
+  "y": 2.0, 
+  "orientacion": 30, 
+  "fecha": "2025-11-23T17:30:00", 
+  "idAprilTag": [1, 4]
 }
 
-GET /api/posicion/ultima
+###GETS
 
-Devuelve la última posición registrada + la información de los AprilTags asociados.
+# AprilTags
+curl -X GET http://localhost:8080/apriltags
 
-GET /api/posiciones
+# Posiciones
+curl -X GET http://localhost:8080/posiciones
 
-Devuelve el historial completo (ordenado de más reciente a más antiguo).
+# Última posición
+curl -X GET http://localhost:8080/posiciones/ultima
+
+# Relaciones
+curl -X GET http://localhost:8080/relaciones
+
 
 🧪 Pruebas rápidas con curl
 
 Insertar una posición
-curl -X POST http://localhost:8080/api/posicion \
--H "Content-Type: application/json" \
--d "{\"x\":1.5,\"y\":2.0,\"orientacion\":30,\"fecha\":\"2025-11-22T17:30:00\",\"idAprilTags\":[1,4]}"
+curl -X POST http://localhost:8080/posiciones 
+-H "Content-Type: application/json" 
+-d '{"x": 1.5, 
+    "y": 2.0, 
+    "orientacion": 30, 
+    "fecha": "2025-11-23T17:30:00", 
+    "idAprilTag": [1, 4]}'
 
-Consultar la última
-curl http://localhost:8080/api/posicion/ultima
-
-Consultar AprilTags
-curl -X GET http://localhost:8080/api/apriltags | json_pp
 
 
 ✔ Notas finales
