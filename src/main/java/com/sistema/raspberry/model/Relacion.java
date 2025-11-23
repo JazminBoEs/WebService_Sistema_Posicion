@@ -2,6 +2,7 @@ package com.sistema.raspberry.model;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;  // ← Agregar
 
 @Entity
 @Table(name = "Relacion")
@@ -15,6 +16,7 @@ public class Relacion {
     @ManyToOne
     @JsonProperty("id_Posicion")
     @JoinColumn(name = "id_Posicion")
+    @JsonIgnore  // ← Agregar esta línea para evitar ciclos
     private Posicion posicion;
 
     // Muchas relaciones pueden tener el mismo AprilTag
@@ -22,6 +24,7 @@ public class Relacion {
     @JsonProperty("id_AprilTag")
     @JoinColumn(name = "id_AprilTag")
     private AprilTag aprilTag;
+
 
     // Constructores
     public Relacion() {}

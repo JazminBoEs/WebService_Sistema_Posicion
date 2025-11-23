@@ -80,6 +80,9 @@ curl -X POST http://localhost:8080/api/posicion \
 Consultar la última
 curl http://localhost:8080/api/posicion/ultima
 
+Consultar AprilTags
+curl -X GET http://localhost:8080/api/apriltags | json_pp
+
 
 ✔ Notas finales
 

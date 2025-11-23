@@ -37,6 +37,18 @@ public class PosicionController {
         return posicionRepository.findAll();
     }
 
+    // GET: obtener la última posición registrada
+    @GetMapping("/ultima")
+    public ResponseEntity<Posicion> getLastPosition() {
+        List<Posicion> posiciones = posicionRepository.findAll();
+        if (posiciones.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        // Obtener la última posición (la más reciente por ID)
+        Posicion ultima = posiciones.get(posiciones.size() - 1);
+        return ResponseEntity.ok(ultima);
+    }
+
     // POST: crear nueva posición con relaciones a AprilTags
     @PostMapping
     public ResponseEntity<?> createPosition(@RequestBody Map<String, Object> payload) {
